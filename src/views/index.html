@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>MyWebSite</title>
+    <script src="web/node_modules/es6-shim/es6-shim.min.js"></script>
+    <script src="web/node_modules/systemjs/dist/system-polyfills.js"></script>
+    <script src="web/node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="web/node_modules/systemjs/dist/system.src.js"></script>
+    <script src="web/node_modules/rxjs/bundles/Rx.js"></script>
+    <script src="web/node_modules/angular2/bundles/angular2.dev.js"></script>      
+</head>
+<body>
+    <h1>{{name}}</h1>
+    <my-app>Loading..</my-app>
+    <script>
+        System.config({
+            paths: {
+                'boot': 'web/build/src/boot',
+                'angular2/*': 'web/node_modules/angular2/*',
+                'rxjs/*': 'web/node_modules/rxjs/*'    
+            },
+            defaultJSExtensions: true
+        });
+        System.import('boot')
+            .then(null, console.error.bind(console));
+    </script>
+</body>
+</html>
