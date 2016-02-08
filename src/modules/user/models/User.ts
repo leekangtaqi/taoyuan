@@ -9,6 +9,7 @@ export function User(domainBuilder){
     .withCreatedOn()
     .withProperties({
         name:         {type: String, required: true},
+        password:     {type: String, required: true},
         desc:         {type: String}
     })
     .build();
