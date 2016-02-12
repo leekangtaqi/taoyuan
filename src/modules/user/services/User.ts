@@ -17,4 +17,13 @@ export = class UserSerivice{
                 callback(err);    
             })
     };
+    getUserByUsernameAndPassword(user: Model.IUser, callback){
+        var User = this.context.models.User;
+        User.findOne({name: user.name, password: user.password}, null, {lean:true})
+            .then((doc)=>{
+                callback(null, doc)
+            }, (err)=>{
+                callback(err);    
+            })
+    }
 }

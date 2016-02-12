@@ -1,3 +1,4 @@
 export = {
-    user: require('./User')
+    user: require('./User'),
+    post: require('./Post')
 }

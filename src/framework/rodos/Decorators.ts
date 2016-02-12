@@ -37,6 +37,20 @@ export function Get(route?: RegExp|string, options?: ActionOptions): Function{
         })
     }
 }
+
+export function Post(route?: RegExp, options?: ActionOptions): Function;
+export function Post(route?: string, options?: ActionOptions): Function;
+export function Post(route?: RegExp|string, options?: ActionOptions): Function{
+    return function(object: Object, methodName: string){
+        defaultMetadataStorage.addActionMetadata({
+            route: route,
+            object: object,
+            method: methodName,
+            options: options,
+            type: ActionType.POST
+        })
+    }
+}
 export function Req(){
     return function(object: Object, methodName: string, index: number){
         defaultMetadataStorage.addParamMetadata({

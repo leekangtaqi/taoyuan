@@ -1,2 +1,8 @@
-<menu></menu>
-<router-outlet></router-outlet>
+<menu [loggedIn]='loggedIn' [navIndex]='navIndex'></menu>
+<router-outlet [route-will-load]="routeInit" (loginEmitter)='onLoggedIn($event)'></router-outlet>
+<nav>
+  <ul class="pager">
+    <li [ngClass]="{disabled: currPage<=1}" (click)="onPrevious()"><a>Previous</a></li>
+    <li (click)="onNext()" [ngClass]="{disabled: currPage>=totalPage}"><a>Next</a></li>
+  </ul>
+</nav>

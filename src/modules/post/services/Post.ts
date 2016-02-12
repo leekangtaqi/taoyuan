@@ -9,6 +9,7 @@ export = class PostSerivice{
     create(post: Model.IPost, callback){
         var Post = this.context.models.Post;
         var postModel = new Post(post);
+        postModel.crtOn = (new Date()).getTime();
         postModel
             .save()
             .then((doc)=>{
@@ -17,4 +18,17 @@ export = class PostSerivice{
                 callback(err);    
             })
     };
+    getPostsCount(callback: Function){
+        var Post = this.context.models.Post;
+        Post.find().count(callback);
+    };
+    getPostsByPage(postModel: {pageNum: number, numPerPage: number}, callback){
+        var Post:any = this.context.models.Post;
+        Post.find({}, null, {skip: (postModel.pageNum-1)*postModel.numPerPage, limit: postModel.numPerPage, sort: {crtOn: -1}, lean: true})
+            .then((doc)=>{
+                callback(null, doc)
+            }, (err)=>{
+                callback(err);    
+            })
+    }
 }

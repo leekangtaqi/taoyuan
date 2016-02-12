@@ -12,10 +12,6 @@ import {registerActionsInExpressApp} from '../framework/rodos/Factory';
 declare var require;
 export var app = express();
 
-// require('../controllers/UserController');
-// require('../controllers/SpaController');
-registerActionsInExpressApp(app, [path.join(__dirname, '../controllers')]);
-
 app.set('views', path.join( __dirname, '../../../src/views'));
 app.set('view engine', 'html');
 app.set('view options', { layout: false });
@@ -23,6 +19,8 @@ app.engine('html', swig.renderFile);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride());
+
+registerActionsInExpressApp(app, [path.join(__dirname, '../controllers')]);
 
 app.use('/public', serverStatic((path.join(__dirname + '../../../../public'))));
 app.use('/web', serverStatic((path.join(__dirname + '../../../../web'))));

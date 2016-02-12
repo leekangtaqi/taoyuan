@@ -4,25 +4,31 @@ import {Http, Response, Headers, RequestOptions} from 'angular2/http';
 
 export interface IPost {
     title: string,
-    user: Object,
+    initiator: string | Object,
     content: string,
-    tags?: string[],
-    comments?: IComment[]
+    comments?: IComment[] | string[]
 }
 
 @Injectable()
-class Post {
+export class PostService {
     private baseUrl: string =  '/api/post';
     constructor(private http: Http){}
-    getPostsByPage(pageNum: number, numPerPage: number = 10): Promise<IPost[]>{
-        return new Promise<IPost[]>((resolve, reject)=>
-            setTimeout(()=>resolve([]), 2000)
-        );
+    getPostsByPage(pageNum: number, numPerPage: number = 10): Promise<any>{
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http
+            .post(this.baseUrl + '/all', JSON.stringify({pageNum: pageNum, numPerPage: numPerPage}), options)
+            .toPromise()
+            .then(res=><IPost[]>res.json().data)
+            .catch(err => {
+                console.error(err);
+                Promise.reject(err.message || err.json().error)
+            })
     }
     createPost(post: IPost){
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        this.http
+        return this.http
             .post(this.baseUrl, JSON.stringify(post), options)
             .toPromise()
             .then(res => <IPost>res.json().data)

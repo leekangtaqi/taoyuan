@@ -1,8 +1,10 @@
 import {Http, Headers, RequestOptions} from 'angular2/http';
-import {Injectable} from 'angular2/core'
+import {Injectable} from 'angular2/core';
+import 'rxjs/Rx';
+
 
 export interface IUser{
-    crtOn: string,
+    crtOn?: string,
     name: string,
     desc?: string,
     password: string
@@ -17,6 +19,18 @@ export class UserService{
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.baseUrl, body, options)
+            .toPromise()
+            .then(res => res.json().data)
+            .catch(err => {
+                console.error(err);
+                Promise.reject(err.message || err.json().error);
+            })
+    }
+    login(user: IUser){
+        let body = JSON.stringify(user);
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.baseUrl + '/login', body, options)
             .toPromise()
             .then(res => res.json().data)
             .catch(err => {

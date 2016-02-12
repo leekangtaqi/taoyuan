@@ -1,0 +1,19 @@
+<div class="container">
+    <article *ngFor="#post of posts" class="post">
+        <div class="post-header">
+            <div class="post-title">
+                <h2>{{post.title}}</h2>
+            </div>
+            <div class="post-meta">
+                <div class="post-crton">Posted On: {{post.crtOn | date}}</div>
+                <div>&nbsp;&nbsp; | &nbsp;&nbsp;</div>
+                <div class="post-comments">{{0}} Comments</div>
+            </div>
+            <div style="clear: both"></div>
+        </div>
+        <div class="post-body">
+            <div [innerHtml]="post.content"></div>
+        </div>
+        <div class="post-footer"></div>
+    </article>
+</div>

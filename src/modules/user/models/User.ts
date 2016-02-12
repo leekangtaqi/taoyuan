@@ -1,6 +1,7 @@
 export interface IUser{
-    name?: string,
-    desc?: string
+    name: string,
+    desc: string,
+    password: string
 }
 export function User(domainBuilder){
     var schema = domainBuilder

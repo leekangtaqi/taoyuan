@@ -18,7 +18,8 @@ export class ParamHandler{
                    value = this.handleParamFormat(value, param); 
                 }
                 break;
-        }           
+        }
+        return value;           
     }
     handleParamFormat(value: any, param: ParamMetadata): any{
         const format = param.format;

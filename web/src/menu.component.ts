@@ -1,9 +1,10 @@
-import {Component, View} from 'angular2/core';
+import {Component, View, Input} from 'angular2/core';
 import {OnInit} from 'angular2/core';
 import { RouteConfig, RouterLink, RouterOutlet, ROUTER_DIRECTIVES} from 'angular2/router';
 
 @Component({
-    selector: 'menu'
+    selector: 'menu',
+    inputs: ['loggedIn', 'navIndex']
 })
 @View({
     templateUrl: 'web/templates/menu.html',
@@ -23,8 +24,12 @@ import { RouteConfig, RouterLink, RouterOutlet, ROUTER_DIRECTIVES} from 'angular
     directives: [ROUTER_DIRECTIVES]
 })
 export class MenuComponent implements OnInit{
+    @Input() navIndex: number = 1;
     ngOnInit(){
        
+    }
+    onNav(index){
+        this.navIndex = index;
     }
     constructor(){}
 }

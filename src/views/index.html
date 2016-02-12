@@ -3,6 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>MyWebSite</title>
+    <link rel="stylesheet" href="web/node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <script src="web/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="web/node_modules/es6-shim/es6-shim.min.js"></script>
     <script src="web/node_modules/systemjs/dist/system-polyfills.js"></script>
     <script src="web/node_modules/angular2/bundles/angular2-polyfills.js"></script>
@@ -10,18 +12,26 @@
     <script src="web/node_modules/rxjs/bundles/Rx.js"></script>
     <script src="web/node_modules/angular2/bundles/angular2.dev.js"></script>
     <script src="web/node_modules/angular2/bundles/router.dev.js"></script>
-    <script src="web/node_modules/angular2/bundles/http.dev.js"></script>      
+    <script src="web/node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="web/node_modules/markdown/lib/markdown.js"></script>
+    <script src="web/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 90px;
+            font-family: '微软雅黑'; 
+        }   
+    </style>      
 </head>
 <base href="/">
 <body>
-    <h1>{{name}}</h1>
     <my-app>Loading..</my-app>
     <script>
         System.config({
             paths: {
                 'boot': 'web/build/src/boot',
                 'angular2/*': 'web/node_modules/angular2/*',
-                'rxjs/*': 'web/node_modules/rxjs/*'    
+                'rxjs/*': 'web/node_modules/rxjs/*',
+                'rxjs/operator/*': 'web/node_modules/rxjs/add/operator/*',
             },
             defaultJSExtensions: true
         });

@@ -17,11 +17,10 @@ import {store} from './store';
             border-left: 5px solid #a94442; /* red */
         }
     `],
-    templateUrl: 'web/templates/registry.html'
+    templateUrl: 'web/templates/login.html'
 })
-export class UserRegistryComponent{
-    public model = new User('', '');  
-    @Output('loginEmitter') loginEmitter = new EventEmitter<User>();  
+export class UserLoginComponent{
+    public model = new User('', '');   
     private active = true;
     constructor(
         private service: UserService, 
@@ -34,11 +33,15 @@ export class UserRegistryComponent{
         setTimeout(()=>{this.active = true}, 0)
     }
     onSubmit(){
-        this.service.create(this.model)
+        this.service.login(this.model)
             .then(user=>{
-                store.emit({methodName: 'loggedIn', user: user});               
-                this.loginEmitter.emit(user);
-                this._router.navigate(['PostList', {loggedIn: true}]);
+                if(user){
+                    store.emit({methodName: 'loggedIn', user: user});               
+                    this._router.navigate(['PostList', {loggedIn: true}]);
+                    return;
+                }
+                alert('该用户没有注册');
+                this.onReset();
             })
     }
 }
