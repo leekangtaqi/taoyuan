@@ -20,6 +20,9 @@ import {store} from '../store';
         .post-meta >div:nth-child(1){
             color: #A2A2A2;
         }
+        .post-meta >div:nth-child(3){
+            color: #A2A2A2;
+        }
         .post-title{
             position: relative;
             font-size: 26px;
