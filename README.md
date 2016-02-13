@@ -1,3 +1,3 @@
-# Rodos
-## A skeleton Nodejs and Angular2 Web project
-### Base on Typescript
+# Taoyuan
+## a private blog
+### Base on Angular2 and Nodejs in ts
